@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Archana Coffee Corner</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #faf7f4;
+            color: #2d211c;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            min-height: 75px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 3%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #9b5c32;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 17px;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #9b5c32;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(30, 18, 12, 0.60),
+                    rgba(30, 18, 12, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1800&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .small-title {
+            color: #f0c7a5;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 72px;
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: #e3a06e;
+        }
+
+        .hero p {
+            color: #f5e5dc;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 28px;
+            border-radius: 8px;
+            background: #a76136;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #754323;
+            transform: translateY(-3px);
+        }
+
+        .hero-btn.outline {
+            background: transparent;
+            border: 1px solid white;
+        }
+
+        .hero-btn.outline:hover {
+            background: white;
+            color: #4a2a1b;
+        }
+
+        /* ================= COMMON ================= */
+
+        .section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 80px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h2 {
+            font-size: 34px;
+            color: #3a241a;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            text-align: center;
+            width: 90%;
+            max-width: 850px;
+            margin: 80px auto;
+        }
+
+        .welcome h2 {
+            font-size: 36px;
+            margin-bottom: 18px;
+        }
+
+        .welcome h2 span {
+            color: #9b5c32;
+        }
+
+        .welcome p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ================= POPULAR ================= */
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 18px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            color: #9b5c32;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .add {
+            border: none;
+            background: #9b5c32;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .add:hover {
+            background: #754323;
+        }
+
+        /* ================= WHY CHOOSE US ================= */
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .why-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .why-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .why-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            width: 90%;
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 60px 30px;
+            text-align: center;
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    rgba(60, 35, 22, 0.92),
+                    rgba(60, 35, 22, 0.92)
+                ),
+                url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80");
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #eadbd2;
+            margin-bottom: 25px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #241812;
+            color: white;
+            padding: 50px 7%;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 17px;
+        }
+
+        .footer-column p {
+            color: #cdbdb4;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #cdbdb4;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #4a352b;
+            margin-top: 35px;
+            padding-top: 20px;
+            text-align: center;
+            color: #bca9a0;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1200px) {
+
+            .navbar {
+                padding: 0 2%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+        }
+
+        @media (max-width: 950px) {
+
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 15px 3%;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-left: 0;
+            }
+
+            .category-grid,
+            .items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .hero {
+                min-height: 580px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .category-grid,
+            .items,
+            .why-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .heading h2 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ☕ <span>Archana</span> Coffee Corner
+        </div>
+
+        <nav class="nav-links">
+
+            <!-- 1. HOME -->
+            <a href="index.html" class="active">
+                Home
+            </a>
+
+            <!-- 2. ABOUT -->
+            <a href="about.html">
+                About
+            </a>
+
+            <!-- 3. MENU -->
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <!-- 4. OFFERS -->
+            <a href="offers.html">
+                Offers
+            </a>
+
+            <!-- 5. GALLERY -->
+            <a href="gallery.html">
+                Gallery
+            </a>
+
+            <!-- 6. RESERVATION -->
+            <a href="reservation.html">
+                Reservation
+            </a>
+
+            <!-- 7. CONTACT -->
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <!-- 8. SIGN IN -->
+            <a href="sign%20in.html">
+                Sign In
+            </a>
+
+            <!-- 9. CART -->
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                ☕ WELCOME TO
+            </div>
+
+            <h1>
+                ARCHANA
+                <span>COFFEE CORNER</span>
+            </h1>
+
+            <p>
+                Freshly Brewed Coffee • Delicious Snacks •
+                Beautiful Moments
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="menu.html" class="hero-btn">
+                    Explore Menu →
+                </a>
+
+                <a href="reservation.html" class="hero-btn outline">
+                    Reserve Table
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WELCOME ================= -->
+
+    <section class="welcome">
+
+        <h2>
+            Welcome to
+            <span>Archana Coffee Corner</span>
+        </h2>
+
+        <p>
+            A cosy place to enjoy freshly brewed coffee,
+            refreshing tea, delicious snacks and tasty
+            cakes. Come in, relax and enjoy your favourite
+            treats with your loved ones.
+        </p>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                What are you craving?
+            </h2>
+
+            <p>
+                Choose your favourite category
+            </p>
+
+        </div>
+
+        <div class="category-grid">
+
+            <div
+                class="category"
+                onclick="window.location.href='menu.html'">
+
+                <div class="category-icon">
+                    ☕
+                </div>
+
+                <h3>
+                    Coffee
+                </h3>
+
+                <p>
+                    Freshly brewed coffee
+                </p>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="window.location.href='menu.html'">
+
+                <div class="category-icon">
+                    🍵
+                </div>
+
+                <h3>
+                    Tea
+                </h3>
+
+                <p>
+                    Refreshing tea varieties
+                </p>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="window.location.href='menu.html'">
+
+                <div class="category-icon">
+                    🥪
+                </div>
+
+                <h3>
+                    Snacks
+                </h3>
+
+                <p>
+                    Tasty quick bites
+                </p>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="window.location.href='menu.html'">
+
+                <div class="category-icon">
+                    🍰
+                </div>
+
+                <h3>
+                    Cakes
+                </h3>
+
+                <p>
+                    Delicious sweet treats
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= POPULAR ITEMS ================= -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                Popular Right Now
+            </h2>
+
+            <p>
+                Our customer favourites
+            </p>
+
+        </div>
+
+
+        <div class="items">
+
+
+            <!-- CAPPUCCINO -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
+                    alt="Cappuccino">
+
+                <div class="card-content">
+
+                    <h3>
+                        Cappuccino
+                    </h3>
+
+                    <p>
+                        Rich espresso with smooth
+                        steamed milk foam.
+                    </p>
+
+                    <div class="card-bottom">
+
+                        <span class="price">
+                            ₹120
+                        </span>
+
+                        <button
+                            class="add"
+                            onclick="addToCart('Cappuccino',120)">
+
+                            ADD
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOCHA -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=800&q=80"
+                    alt="Mocha">
+
+                <div class="card-content">
+
+                    <h3>
+                        Mocha
+                    </h3>
+
+                    <p>
+                        Smooth coffee blended with
+                        rich chocolate.
+                    </p>
+
+                    <div class="card-bottom">
+
+                        <span class="price">
+                            ₹140
+                        </span>
+
+                        <button
+                            class="add"
+                            onclick="addToCart('Mocha',140)">
+
+                            ADD
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHOCOLATE DONUT -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
+                    alt="Chocolate Donut">
+
+                <div class="card-content">
+
+                    <h3>
+                        Chocolate Donut
+                    </h3>
+
+                    <p>
+                        Soft donut with delicious
+                        chocolate glaze.
+                    </p>
+
+                    <div class="card-bottom">
+
+                        <span class="price">
+                            ₹80
+                        </span>
+
+                        <button
+                            class="add"
+                            onclick="addToCart('Chocolate Donut',80)">
+
+                            ADD
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHOCOLATE CAKE -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+                    alt="Chocolate Cake">
+
+                <div class="card-content">
+
+                    <h3>
+                        Chocolate Cake
+                    </h3>
+
+                    <p>
+                        Rich chocolate cake with
+                        creamy layers.
+                    </p>
+
+                    <div class="card-bottom">
+
+                        <span class="price">
+                            ₹160
+                        </span>
+
+                        <button
+                            class="add"
+                            onclick="addToCart('Chocolate Cake',160)">
+
+                            ADD
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WHY CHOOSE US ================= -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                Why Choose Us?
+            </h2>
+
+            <p>
+                We make every visit special
+            </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    ☕
+                </div>
+
+                <h3>
+                    Freshly Brewed
+                </h3>
+
+                <p>
+                    Every cup is freshly prepared
+                    using quality coffee beans.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    🥐
+                </div>
+
+                <h3>
+                    Fresh Food
+                </h3>
+
+                <p>
+                    Delicious snacks and cakes
+                    prepared with care.
+                </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">
+                    😊
+                </div>
+
+                <h3>
+                    Friendly Service
+                </h3>
+
+                <p>
+                    A warm and friendly atmosphere
+                    for every customer.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready for a Perfect Cup?
+        </h2>
+
+        <p>
+            Visit Archana Coffee Corner and
+            enjoy your favourite coffee.
+        </p>
+
+        <a
+            href="reservation.html"
+            class="hero-btn">
+
+            Reserve Your Table
+
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div class="footer-column">
+
+                <h3>
+                    ☕ Archana Coffee Corner
+                </h3>
+
+                <p>
+                    Your favourite place for freshly
+                    brewed coffee, tasty snacks and
+                    beautiful moments.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="menu.html">
+                    Menu
+                </a>
+
+                <a href="offers.html">
+                    Offers
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Customer
+                </h3>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="reservation.html">
+                    Reservation
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a href="sign%20in.html">
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>
+                    📍 Kurnool, Andhra Pradesh
+                </p>
+
+                <p>
+                    📞 +91 98765 43210
+                </p>
+
+                <p>
+                    ✉ hello@archanacoffee.com
+                </p>
+
+                <a href="cart.html">
+                    🛒 View Cart
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Archana Coffee Corner.
+            All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function addToCart(name, price) {
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("archanaCart")
+                ) || [];
+
+            let existing =
+                cart.find(
+                    item => item.name === name
+                );
+
+            if (existing) {
+
+                existing.quantity++;
+
+            } else {
+
+                cart.push({
+
+                    name: name,
+                    price: price,
+                    quantity: 1
+
+                });
+
+            }
+
+            localStorage.setItem(
+                "archanaCart",
+                JSON.stringify(cart)
+            );
+
+            alert(
+                name + " added to cart! ☕"
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign In - Archana Coffee Corner</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #3e2723, #6d4c41);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+    width: 100%;
+    background: #2b1810;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #f5d7a1;
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    color: #f5c27a;
+}
+
+/* ================= SIGN IN BOX ================= */
+
+.container {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-box {
+    width: 900px;
+    max-width: 100%;
+    min-height: 520px;
+    background: #fffaf3;
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+/* ================= LEFT SIDE ================= */
+
+.left {
+    width: 45%;
+
+    background:
+        linear-gradient(
+            rgba(43,24,16,0.82),
+            rgba(43,24,16,0.82)
+        ),
+        url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+    padding: 50px 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.left h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+    color: #f5d7a1;
+}
+
+.left h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.left p {
+    line-height: 1.7;
+    color: #f4e7d5;
+    margin-bottom: 25px;
+}
+
+.features {
+    text-align: left;
+    line-height: 2;
+    margin-top: 10px;
+}
+
+.features div {
+    color: #f5d7a1;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.right {
+    width: 55%;
+    padding: 55px 50px;
+}
+
+.right h2 {
+    color: #4b2e24;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #4b2e24;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #d6c4b5;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    border-color: #8d5a3b;
+    box-shadow: 0 0 5px rgba(141,90,59,0.25);
+}
+
+/* ================= PASSWORD ================= */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 50px;
+}
+
+.eye {
+    position: absolute;
+    right: 15px;
+    top: 14px;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+/* ================= OPTIONS ================= */
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 25px;
+    font-size: 14px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.forgot {
+    color: #7b4b35;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ================= BUTTON ================= */
+
+.sign-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #5d3828;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sign-btn:hover {
+    background: #3e2723;
+    transform: translateY(-2px);
+}
+
+/* ================= CREATE ACCOUNT ================= */
+
+.create {
+    text-align: center;
+    margin-top: 25px;
+    color: #777;
+}
+
+.create span {
+    color: #7b4b35;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ================= MESSAGE ================= */
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    color: #f5d7a1;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .login-box {
+        flex-direction: column;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+    }
+
+    .left {
+        min-height: 300px;
+        padding: 35px 25px;
+    }
+
+    .right {
+        padding: 40px 25px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .left h1 {
+        font-size: 30px;
+    }
+
+    .right h2 {
+        font-size: 27px;
+    }
+
+    .options {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        ☕ Archana Coffee Corner
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="menu.html">
+                Menu
+            </a>
+        </li>
+
+        <li>
+            <a href="offers.html">
+                Offers
+            </a>
+        </li>
+
+        <li>
+            <a href="gallery.html">
+                Gallery
+            </a>
+        </li>
+
+        <li>
+            <a href="reservation.html">
+                Reservation
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+        <li>
+            <a href="sign%20in.html" class="active">
+                Sign In
+            </a>
+        </li>
+
+        <li>
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div class="container">
+
+    <div class="login-box">
+
+        <!-- LEFT SIDE -->
+
+        <div class="left">
+
+            <h1>☕</h1>
+
+            <h2>Welcome Back!</h2>
+
+            <p>
+                Sign in to Archana Coffee Corner and enjoy
+                delicious coffee, snacks, cakes and more.
+            </p>
+
+            <div class="features">
+
+                <div>☕ Freshly Brewed Coffee</div>
+
+                <div>🍰 Delicious Cakes</div>
+
+                <div>🥪 Tasty Snacks</div>
+
+                <div>🚚 Easy Online Ordering</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="right">
+
+            <h2>Sign In</h2>
+
+            <p class="subtitle">
+                Login to your Archana Coffee Corner account
+            </p>
+
+
+            <form id="loginForm">
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <span
+                            class="eye"
+                            onclick="togglePassword()"
+                        >
+                            👁️
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <span
+                        class="forgot"
+                        onclick="forgotPassword()"
+                    >
+                        Forgot Password?
+                    </span>
+
+                </div>
+
+
+                <!-- SIGN IN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="sign-btn"
+                >
+                    Sign In
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    class="message"
+                    id="message"
+                ></div>
+
+            </form>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <div class="create">
+
+                Don't have an account?
+
+                <span onclick="createAccount()">
+                    Create Account
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+    © 2026 Archana Coffee Corner | Fresh Coffee • Fresh Moments
+</footer>
+
+
+<script>
+
+/* ================= PASSWORD SHOW / HIDE ================= */
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+
+    }
+
+}
+
+
+/* ================= LOGIN ================= */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    /* Get registered user */
+
+    const savedUser =
+        JSON.parse(
+            localStorage.getItem("archanaUser")
+        );
+
+
+    /* If account exists */
+
+    if (savedUser) {
+
+        if (
+            email === savedUser.email &&
+            password === savedUser.password
+        ) {
+
+            localStorage.setItem(
+                "archanaLoggedIn",
+                "true"
+            );
+
+            localStorage.setItem(
+                "archanaLoginEmail",
+                email
+            );
+
+            message.style.color = "green";
+
+            message.innerHTML =
+                "✓ Sign in successful!";
+
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "index.html";
+
+            }, 1000);
+
+        } else {
+
+            message.style.color = "red";
+
+            message.innerHTML =
+                "✗ Incorrect email or password.";
+
+        }
+
+    } else {
+
+        message.style.color = "#7b4b35";
+
+        message.innerHTML =
+            "Please create an account first.";
+
+    }
+
+});
+
+
+/* ================= FORGOT PASSWORD ================= */
+
+function forgotPassword() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+
+    if (email === "") {
+
+        alert(
+            "Please enter your email address first."
+        );
+
+        return;
+
+    }
+
+
+    const savedUser =
+        JSON.parse(
+            localStorage.getItem("archanaUser")
+        );
+
+
+    if (
+        savedUser &&
+        email === savedUser.email
+    ) {
+
+        alert(
+            "Your account is registered with this email. Please use your saved password to sign in."
+        );
+
+    } else {
+
+        alert(
+            "No account found with this email."
+        );
+
+    }
+
+}
+
+
+/* ================= CREATE ACCOUNT ================= */
+
+function createAccount() {
+
+    const name =
+        prompt("Enter your full name:");
+
+    if (!name) return;
+
+
+    const email =
+        prompt("Enter your email:");
+
+    if (!email) return;
+
+
+    const mobile =
+        prompt("Enter your 10-digit mobile number:");
+
+    if (!mobile) return;
+
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+
+        alert(
+            "Please enter a valid 10-digit mobile number."
+        );
+
+        return;
+
+    }
+
+
+    const password =
+        prompt("Create a password:");
+
+    if (!password) return;
+
+
+    if (password.length < 6) {
+
+        alert(
+            "Password must contain at least 6 characters."
+        );
+
+        return;
+
+    }
+
+
+    const user = {
+
+        name: name,
+
+        email: email,
+
+        mobile: mobile,
+
+        password: password
+
+    };
+
+
+    localStorage.setItem(
+        "archanaUser",
+        JSON.stringify(user)
+    );
+
+
+    alert(
+        "Account created successfully! Now you can sign in."
+    );
+
+
+    document.getElementById("email").value =
+        email;
+
+    document.getElementById("password").value =
+        "";
+
+}
+
+</script>
+
+</body>
+</html>

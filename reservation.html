@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Table Reservation - Archana Coffee Corner</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf7f4;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: white;
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #9b5c32;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #9b5c32;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            height: 300px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.55)
+                ),
+                url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+        /* ================= RESERVATION ================= */
+
+        .reservation-section {
+            padding: 60px 20px;
+        }
+
+        .reservation-container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .reservation-container h2 {
+            text-align: center;
+            color: #9b5c32;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #4b2e20;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 13px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 15px;
+            outline: none;
+
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #9b5c32;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .reserve-btn {
+            display: block;
+
+            margin: 30px auto 0;
+
+            padding: 14px 35px;
+
+            background: #9b5c32;
+            color: white;
+
+            border: none;
+            border-radius: 25px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .reserve-btn:hover {
+            background: #754321;
+            transform: translateY(-2px);
+        }
+
+        /* ================= SUCCESS ================= */
+
+        #successMessage {
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #f1e5dc;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            color: #6b3d20;
+
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #3b2418;
+            color: white;
+
+            padding: 40px 7% 20px;
+        }
+
+        .footer-container {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 30px;
+        }
+
+        footer h3 {
+            color: #e5a66f;
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        .footer-link {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #e5a66f;
+        }
+
+        .copyright {
+            text-align: center;
+
+            border-top:
+                1px solid #654638;
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            color: #ccc;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                margin-left: 0;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .reservation-container {
+                padding: 25px;
+            }
+
+            .hero {
+                height: 260px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            ☕ Archana Coffee Corner
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="menu.html">
+                    Menu
+                </a>
+            </li>
+
+            <li>
+                <a href="offers.html">
+                    Offers
+                </a>
+            </li>
+
+            <li>
+                <a href="gallery.html">
+                    Gallery
+                </a>
+            </li>
+
+            <li>
+                <a href="reservation.html"
+                   class="active">
+                    Reservation
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+                <a href="sign%20in.html">
+                    Sign In
+                </a>
+            </li>
+
+            <li>
+                <a href="cart.html">
+                    🛒 Cart
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div>
+
+            <h1>
+                Reserve Your Table
+            </h1>
+
+            <p>
+                Book your perfect table at
+                Archana Coffee Corner
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RESERVATION FORM ================= -->
+
+    <section class="reservation-section">
+
+        <div class="reservation-container">
+
+            <h2>
+                Table Reservation
+            </h2>
+
+            <p class="subtitle">
+                Fill in the details below to reserve your table.
+            </p>
+
+
+            <form id="reservationForm">
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter 10-digit phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter email"
+                            required>
+
+                    </div>
+
+
+                    <!-- GUESTS -->
+
+                    <div class="form-group">
+
+                        <label for="guests">
+                            Number of Guests
+                        </label>
+
+                        <select id="guests" required>
+
+                            <option value="">
+                                Select guests
+                            </option>
+
+                            <option value="1 Guest">
+                                1 Guest
+                            </option>
+
+                            <option value="2 Guests">
+                                2 Guests
+                            </option>
+
+                            <option value="3 Guests">
+                                3 Guests
+                            </option>
+
+                            <option value="4 Guests">
+                                4 Guests
+                            </option>
+
+                            <option value="5 Guests">
+                                5 Guests
+                            </option>
+
+                            <option value="6 Guests">
+                                6 Guests
+                            </option>
+
+                            <option value="7+ Guests">
+                                7+ Guests
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required>
+
+                    </div>
+
+
+                    <!-- TIME -->
+
+                    <div class="form-group">
+
+                        <label for="time">
+                            Time
+                        </label>
+
+                        <select id="time" required>
+
+                            <option value="">
+                                Select time
+                            </option>
+
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>01:00 PM</option>
+                            <option>02:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>06:00 PM</option>
+                            <option>07:00 PM</option>
+                            <option>08:00 PM</option>
+                            <option>09:00 PM</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SPECIAL REQUEST -->
+
+                    <div class="form-group full">
+
+                        <label for="message">
+                            Special Request
+                        </label>
+
+                        <textarea
+                            id="message"
+                            placeholder="Any special request?"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="reserve-btn">
+
+                    Reserve Table
+
+                </button>
+
+            </form>
+
+
+            <!-- SUCCESS -->
+
+            <div id="successMessage"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-container">
+
+
+            <div>
+
+                <h3>
+                    ☕ Archana Coffee Corner
+                </h3>
+
+                <p>
+                    Your favorite place for coffee,
+                    food and good moments.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='index.html'">
+                    Home
+                </p>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='about.html'">
+                    About
+                </p>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='menu.html'">
+                    Menu
+                </p>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='offers.html'">
+                    Offers
+                </p>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='gallery.html'">
+                    Gallery
+                </p>
+
+                <p
+                    class="footer-link"
+                    onclick="location.href='contact.html'">
+                    Contact
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Services
+                </h3>
+
+                <p>
+                    Fresh Coffee
+                </p>
+
+                <p>
+                    Table Reservation
+                </p>
+
+                <p>
+                    Special Offers
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>
+                    📍 Kurnool
+                </p>
+
+                <p>
+                    📞 +91 98765 43210
+                </p>
+
+                <p>
+                    ✉️ archanacoffee@gmail.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Archana Coffee Corner.
+            All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* SET MINIMUM DATE AS TODAY */
+
+        const dateInput =
+            document.getElementById("date");
+
+        const today =
+            new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2, "0");
+
+        dateInput.min =
+            year + "-" + month + "-" + day;
+
+
+        /* RESERVATION FORM */
+
+        document
+            .getElementById("reservationForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const name =
+                        document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+
+                    const phone =
+                        document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                    const date =
+                        document
+                        .getElementById("date")
+                        .value;
+
+
+                    const time =
+                        document
+                        .getElementById("time")
+                        .value;
+
+
+                    const guests =
+                        document
+                        .getElementById("guests")
+                        .value;
+
+
+                    /* PHONE VALIDATION */
+
+                    if (!/^[0-9]{10}$/.test(phone)) {
+
+                        alert(
+                            "Please enter a valid 10-digit phone number."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* SUCCESS MESSAGE */
+
+                    document
+                        .getElementById("successMessage")
+                        .innerHTML =
+
+                        "✅ Thank you, " +
+                        name +
+                        "! Your table for " +
+                        guests +
+                        " is reserved on " +
+                        date +
+                        " at " +
+                        time +
+                        ".";
+
+
+                    document
+                        .getElementById("successMessage")
+                        .style.display =
+                        "block";
+
+
+                    /* SAVE RESERVATION */
+
+                    const reservation = {
+
+                        name: name,
+
+                        phone: phone,
+
+                        email:
+                            document
+                            .getElementById("email")
+                            .value,
+
+                        guests: guests,
+
+                        date: date,
+
+                        time: time,
+
+                        message:
+                            document
+                            .getElementById("message")
+                            .value
+
+                    };
+
+
+                    localStorage.setItem(
+                        "archanaReservation",
+                        JSON.stringify(reservation)
+                    );
+
+
+                    /* RESET FORM */
+
+                    document
+                        .getElementById("reservationForm")
+                        .reset();
+
+                });
+
+    </script>
+
+</body>
+
+</html>

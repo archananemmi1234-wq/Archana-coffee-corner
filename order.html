@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Archana Coffee Corner - Order Tracking</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f5f1;
+            color: #2d211c;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            min-height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            border-bottom: 1px solid #eee;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #9b5c32;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #9b5c32;
+        }
+
+        .nav-links a.active {
+            color: #9b5c32;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            background: #9b5c32;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .home-btn:hover {
+            background: #754323;
+        }
+
+        /* ================= MAIN ================= */
+
+        .order-page {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+        /* ================= ORDER CARD ================= */
+
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ================= ORDER INFO ================= */
+
+        .order-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-number {
+            font-weight: bold;
+        }
+
+        .order-number span {
+            color: #9b5c32;
+        }
+
+        .status {
+            background: #fff2e8;
+            color: #9b5c32;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* ================= TRACKING ================= */
+
+        .tracking {
+            padding: 35px 10px;
+        }
+
+        .track-item {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            min-height: 85px;
+        }
+
+        .track-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .track-item.completed .track-icon,
+        .track-item.active .track-icon {
+            background: #9b5c32;
+            color: white;
+        }
+
+        .track-line {
+            position: absolute;
+            left: 20px;
+            top: 42px;
+            width: 3px;
+            height: 55px;
+            background: #ddd;
+        }
+
+        .track-item.completed .track-line {
+            background: #9b5c32;
+        }
+
+        .track-content {
+            margin-left: 18px;
+        }
+
+        .track-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .track-content p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ================= ORDER ITEMS ================= */
+
+        .items-title {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-quantity {
+            color: #777;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .item-price {
+            font-weight: bold;
+        }
+
+        /* ================= TOTAL ================= */
+
+        .total-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .menu-btn {
+            background: #9b5c32;
+            color: white;
+            border: none;
+        }
+
+        .menu-btn:hover {
+            background: #754323;
+        }
+
+        .reorder-btn {
+            background: white;
+            color: #9b5c32;
+            border: 1px solid #9b5c32;
+        }
+
+        .reorder-btn:hover {
+            background: #fff5ee;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 80px;
+            background: #241812;
+            color: white;
+            text-align: center;
+            padding: 35px;
+        }
+
+        footer p {
+            color: #cdbdb4;
+            margin-top: 8px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 15px 4%;
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                margin-left: 0;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .home-btn {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+            .order-card {
+                padding: 20px;
+            }
+
+            .order-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .order-page {
+                width: 94%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ☕ <span>Archana</span> Coffee Corner
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="menu.html">Menu</a>
+
+            <a href="offers.html">Offers</a>
+
+            <a href="about.html">About</a>
+
+            <a href="gallery.html">Gallery</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="cart.html">🛒 Cart</a>
+
+        </nav>
+
+        <button class="home-btn" onclick="goHome()">
+            Home
+        </button>
+
+    </header>
+
+
+    <!-- ================= ORDER PAGE ================= -->
+
+    <section class="order-page">
+
+        <div class="page-title">
+
+            <h1>
+                Track Your Order
+            </h1>
+
+            <p>
+                Your delicious order is on its way ☕
+            </p>
+
+        </div>
+
+
+        <div class="order-card">
+
+            <!-- ================= ORDER INFORMATION ================= -->
+
+            <div class="order-info">
+
+                <div class="order-number">
+
+                    Order ID:
+
+                    <span id="orderId">
+                        ACC000000
+                    </span>
+
+                </div>
+
+                <div class="status">
+                    Preparing
+                </div>
+
+            </div>
+
+
+            <!-- ================= TRACKING ================= -->
+
+            <div class="tracking">
+
+                <div class="track-item completed">
+
+                    <div class="track-icon">
+                        ✓
+                    </div>
+
+                    <div class="track-line"></div>
+
+                    <div class="track-content">
+
+                        <h3>
+                            Order Confirmed
+                        </h3>
+
+                        <p>
+                            Your order has been received.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="track-item active">
+
+                    <div class="track-icon">
+                        ☕
+                    </div>
+
+                    <div class="track-line"></div>
+
+                    <div class="track-content">
+
+                        <h3>
+                            Preparing
+                        </h3>
+
+                        <p>
+                            Our team is preparing your order.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="track-item">
+
+                    <div class="track-icon">
+                        📦
+                    </div>
+
+                    <div class="track-line"></div>
+
+                    <div class="track-content">
+
+                        <h3>
+                            Ready for Pickup
+                        </h3>
+
+                        <p>
+                            Your order will be ready soon.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="track-item">
+
+                    <div class="track-icon">
+                        🏠
+                    </div>
+
+                    <div class="track-content">
+
+                        <h3>
+                            Delivered
+                        </h3>
+
+                        <p>
+                            Enjoy your order from
+                            Archana Coffee Corner.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ORDER ITEMS ================= -->
+
+            <h2 class="items-title">
+                Order Items
+            </h2>
+
+            <div id="orderItems"></div>
+
+
+            <!-- ================= TOTAL ================= -->
+
+            <div class="total-box">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <!-- ================= ACTION BUTTONS ================= -->
+
+            <div class="actions">
+
+                <button
+                    class="action-btn menu-btn"
+                    onclick="goToMenu()">
+
+                    Order More
+
+                </button>
+
+
+                <button
+                    class="action-btn reorder-btn"
+                    onclick="reorder()">
+
+                    Reorder
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>
+            ☕ Archana Coffee Corner
+        </h3>
+
+        <p>
+            Fresh Coffee • Delicious Snacks • Sweet Moments
+        </p>
+
+        <p>
+            © 2026 Archana Coffee Corner
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= ORDER ID ================= */
+
+        let orderId =
+            localStorage.getItem("archanaOrderId");
+
+        if (!orderId) {
+
+            orderId =
+                "ACC" +
+                Math.floor(
+                    100000 +
+                    Math.random() * 900000
+                );
+
+            localStorage.setItem(
+                "archanaOrderId",
+                orderId
+            );
+        }
+
+        document.getElementById("orderId").innerText =
+            orderId;
+
+
+        /* ================= LAST ORDER ================= */
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("archanaLastOrder")
+            ) || [];
+
+
+        /* ================= SAMPLE ORDER ================= */
+
+        if (cart.length === 0) {
+
+            cart = [
+
+                {
+                    name: "Cappuccino",
+                    price: 120,
+                    quantity: 1
+                },
+
+                {
+                    name: "Chocolate Cake",
+                    price: 160,
+                    quantity: 1
+                }
+
+            ];
+        }
+
+
+        /* ================= DISPLAY ITEMS ================= */
+
+        const container =
+            document.getElementById("orderItems");
+
+        let total = 0;
+
+
+        cart.forEach(function(item) {
+
+            let quantity =
+                item.quantity || 1;
+
+            let itemTotal =
+                item.price * quantity;
+
+            total += itemTotal;
+
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "order-item";
+
+
+            div.innerHTML = `
+
+                <div>
+
+                    <div class="item-name">
+                        ${item.name}
+                    </div>
+
+                    <div class="item-quantity">
+                        Quantity: ${quantity}
+                    </div>
+
+                </div>
+
+                <div class="item-price">
+                    ₹${itemTotal}
+                </div>
+
+            `;
+
+
+            container.appendChild(div);
+
+        });
+
+
+        /* ================= TOTAL ================= */
+
+        document.getElementById("total").innerText =
+            "₹" + (total + 30);
+
+
+        /* ================= HOME ================= */
+
+        function goHome() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* ================= MENU ================= */
+
+        function goToMenu() {
+
+            window.location.href =
+                "menu.html";
+
+        }
+
+
+        /* ================= REORDER ================= */
+
+        function reorder() {
+
+            localStorage.setItem(
+                "archanaCart",
+                JSON.stringify(cart)
+            );
+
+
+            alert(
+                "Items added to your cart! ☕"
+            );
+
+
+            window.location.href =
+                "cart.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
